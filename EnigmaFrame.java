@@ -16,11 +16,10 @@ public class EnigmaFrame extends JFrame {
     private JTextArea input;
     private JTextArea output;
 
+    String rotors[] = {"1", "2", "3", "4", "5"};
+
 
     public EnigmaFrame() {
-        JFrame f = new JFrame();
-
-        String rotors[] = {"1", "2", "3", "4", "5"};
     
         rone = new JComboBox<String>(rotors);
         rtwo = new JComboBox<String>(rotors);
@@ -44,7 +43,7 @@ public class EnigmaFrame extends JFrame {
         topPanel.add(initPos);
         topPanel.add(encrypt);
         topPanel.add(decrypt);
-
+        
         JPanel centerPanel = new JPanel(new FlowLayout());
         centerPanel.add(new JLabel("Input"));
         centerPanel.add(input);
@@ -52,14 +51,41 @@ public class EnigmaFrame extends JFrame {
         JPanel botPanel = new JPanel(new FlowLayout());
         botPanel.add(new JLabel("Output"));
         botPanel.add(output);
+        output.setEditable(false);
 
-        f.add(topPanel, BorderLayout.NORTH);
-        f.add(centerPanel, BorderLayout.CENTER);
-        f.add(botPanel, BorderLayout.SOUTH);
-        f.setTitle("Enigma GUI");
-        f.pack();
-        f.setVisible(true);
+        encrypt.addActionListener((e) -> {crypt("encrypt");});
+        decrypt.addActionListener((e) -> {crypt("decrypt");});
 
+        this.add(topPanel, BorderLayout.NORTH);
+        this.add(centerPanel, BorderLayout.CENTER);
+        this.add(botPanel, BorderLayout.SOUTH);
+        this.setTitle("Enigma GUI");
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.pack();
+    }
+
+    private void crypt(String type) {
+        
+        int r1 = rone.getSelectedIndex();
+        int r2 = rtwo.getSelectedIndex();
+        int r3 = rthree.getSelectedIndex();
+        String rotor1 = rotors[r1];
+        String rotor2 = rotors[r2];
+        String rotor3 = rotors[r3];
+        String pos = initPos.getText().toUpperCase();
+        if (pos.length() != 3) {
+            output.setText("Initial positions must be 3 characters");
+            return;
+        }
+        String in = input.getText();
+
+        String args[] = {rotor1, rotor2, rotor3, pos, type, in};
+        try {
+            String ans = Comms.processEnigma(args);
+            output.setText(ans);
+        } catch (Exception e) {
+            output.setText("An Error Has Occured");
+        }
     }
 
 }
