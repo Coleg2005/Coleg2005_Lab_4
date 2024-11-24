@@ -64,13 +64,13 @@ public class EnigmaFrame extends JFrame {
         this.add(io, BorderLayout.CENTER);
         this.add(new JLabel("ONLY INPUT # AND LETTERS. USE ONLY LETTERS AND # AS INITIAL POSTIONS"), BorderLayout.SOUTH);
         this.setTitle("Enigma GUI");
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
         this.pack();
     }
 
     private void crypt(String type) {
         
-        int r1 = rone.getSelectedIndex();
+        int r1 = rone.getSelectedIndex(); // got this method from oracle
         int r2 = rtwo.getSelectedIndex();
         int r3 = rthree.getSelectedIndex();
         String rotor1 = rotors[r1];
