@@ -28,8 +28,8 @@ public class EnigmaFrame extends JFrame {
         encrypt = new JButton("Encrypt");
         decrypt = new JButton("Decrypt");
 
-        input = new JTextArea(4, 20);
-        output = new JTextArea(4, 20);
+        input = new JTextArea(4, 100);
+        output = new JTextArea(4, 100);
 
     
         JPanel topPanel = new JPanel(new FlowLayout()); 
@@ -81,7 +81,7 @@ public class EnigmaFrame extends JFrame {
 
         String args[] = {rotor1, rotor2, rotor3, pos, type, in};
         try {
-            String ans = Comms.processEnigma(args);
+            String ans = Comms.run(args);
             output.setText(ans);
         } catch (Exception e) {
             output.setText("An Error Has Occured");

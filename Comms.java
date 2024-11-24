@@ -6,20 +6,7 @@ import java.util.Scanner;
  */
 public class Comms {
 
-  public static String processEnigma(String[] args) {
-
-
-    // // Check for the correct # of arguments
-    // if( args.length != 6 || args[3].length() != 3 ) {
-
-    // }
-        
-    // Check for the correct 3 ints
-    for( int i = 0; i < 3; i++ ) {
-      if( args[i].length() != 1 || args[i].charAt(0) < '0' || args[i].charAt(0) > '5' ) {
-        return "Error: Rotor numbers must be between 1 and 5.";
-      }
-    }
+  public static String run(String[] args) {
     
     // Encrypt or decrypt argument
     boolean encrypt = true;
@@ -32,6 +19,9 @@ public class Comms {
     int id3 = Integer.parseInt(args[2]);
     
     // Get the message from the user, and call the appropriate method
+    // Scanner scan = new Scanner(System.in);
+    // String message = scan.next();
+
     String message = args[5];
 
     // Call the Enigma's constructor to build the machine
