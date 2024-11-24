@@ -44,6 +44,5 @@ public class Comms {
       System.out.println(enigma.encrypt(message));
     else
       System.out.println(enigma.decrypt(message));
-      scan.close();
   }
 }
