@@ -53,12 +53,16 @@ public class EnigmaFrame extends JFrame {
         botPanel.add(output);
         output.setEditable(false);
 
+        JPanel io = new JPanel(new BorderLayout());
+        io.add(centerPanel, BorderLayout.NORTH);
+        io.add(botPanel, BorderLayout.CENTER);
+
         encrypt.addActionListener((e) -> {crypt("encrypt");});
         decrypt.addActionListener((e) -> {crypt("decrypt");});
 
         this.add(topPanel, BorderLayout.NORTH);
-        this.add(centerPanel, BorderLayout.CENTER);
-        this.add(botPanel, BorderLayout.SOUTH);
+        this.add(io, BorderLayout.CENTER);
+        this.add(new JLabel("ONLY INPUT # AND LETTERS. USE ONLY LETTERS AND # AS INITIAL POSTIONS"), BorderLayout.SOUTH);
         this.setTitle("Enigma GUI");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.pack();
@@ -77,11 +81,11 @@ public class EnigmaFrame extends JFrame {
             output.setText("Initial positions must be 3 characters");
             return;
         }
-        String in = input.getText();
+        String in = input.getText().toUpperCase();
 
-        String args[] = {rotor1, rotor2, rotor3, pos, type, in};
+        String args[] = {rotor1, rotor2, rotor3, pos, type};
         try {
-            String ans = Comms.run(args);
+            String ans = Comms.processEnigma(args, in);
             output.setText(ans);
         } catch (Exception e) {
             output.setText("An Error Has Occured");
